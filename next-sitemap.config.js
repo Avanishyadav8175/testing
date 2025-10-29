@@ -22,6 +22,12 @@ const config = {
         }
       })
         .then(async (res) => {
+          // Check if response is ok and content-type is JSON
+          if (!res.ok || !res.headers.get('content-type')?.includes('application/json')) {
+            console.warn('Sitemap images API not available during build, skipping image sitemap generation');
+            return [];
+          }
+          
           const { data } = await res.json();
 
           if(!data) return [];
@@ -35,15 +41,13 @@ const config = {
           }));
         })
         .catch((error) => {
-          console.error(error?.messages?.[0] || error);
-
+          console.warn('Sitemap images generation failed during build, skipping:', error?.message || error);
           return [];
         });
 
       return result;
     } catch (error) {
-      console.log({ error });
-
+      console.warn('Sitemap images generation failed during build, skipping:', error?.message || error);
       return [];
     }
   }
