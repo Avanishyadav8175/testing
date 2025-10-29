@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     let dummyImage = await models.Images.findOne({ name: "sample-product-image" });
     if (!dummyImage) {
       dummyImage = await models.Images.create({
-        folderId: dummyFolder._id.toString(),
+        folderId: dummyFolder._id?.toString(),
         folderName: dummyFolder.label,
         name: "sample-product-image",
         defaultAlt: "Product Image",
@@ -339,7 +339,7 @@ export async function POST(request: NextRequest) {
           id: p._id,
           name: p.name,
           sku: p.sku,
-          price: p.price.base.price
+          price: p.price?.base?.price
         })),
         presets: {
           faqGroup: faqGroup.name,
