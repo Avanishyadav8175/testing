@@ -89,7 +89,6 @@ export function LocationProvider({ children }: { children: ReactNode }) {
         })
         .catch((error) => {
           setStatus("initial");
-
           console.error({ error });
         });
     }

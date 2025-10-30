@@ -1,4 +1,4 @@
-const API_KEY = "1tNMPQvO5jA8EgR2sJLI2MGoPK";
+const API_KEY = "1tNMPQvO5jA8EgR2sJLI2MGoPKYqgo";
 const BASE_URL = "http://localhost:3000";
 
 async function makeRequest(endpoint, method = "GET", body = null) {
