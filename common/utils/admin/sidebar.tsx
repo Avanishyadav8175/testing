@@ -1,12 +1,12 @@
-import { camelToKebabCase } from "@/common/utils/case";
 import {
   type AdminPanelSection,
   type AdminPanelSectionProp,
   type AdminPanelSubSectionProp
 } from "@/common/types/layouts/admin/adminPanelLayout";
+import { camelToKebabCase } from "@/common/utils/case";
 import { type ReactNode } from "react";
 
-export const ADMIN_ROOT_ROUTE = "manage";
+export const ADMIN_ROOT_ROUTE = "hsiwirolfkey8080";
 
 const hasSubSections = (
   section: AdminPanelSectionProp

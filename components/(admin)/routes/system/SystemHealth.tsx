@@ -71,12 +71,12 @@ export default function SystemHealth() {
   };
 
   const getStatusBadge = (status: string) => {
-    const variant = status === "connected" || status === "healthy" 
-      ? "default" 
+    const variant = status === "connected" || status === "healthy"
+      ? "default"
       : status === "configured" || status === "degraded"
-      ? "secondary"
-      : "destructive";
-    
+        ? "secondary"
+        : "destructive";
+
     return <Badge variant={variant}>{status}</Badge>;
   };
 
@@ -168,11 +168,10 @@ export default function SystemHealth() {
                   <p className="text-xs text-muted-foreground">Orders</p>
                 </div>
               </div>
-              
+
               <div className="mt-4 pt-4 border-t">
-                <Button 
-                  onClick={seedProducts} 
-                  disabled={seedingProducts}
+                <Button
+
                   className="w-full"
                 >
                   {seedingProducts && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

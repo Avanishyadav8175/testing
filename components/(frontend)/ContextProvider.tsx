@@ -1,19 +1,21 @@
+"use client";
+
 // constants
 import { GOOGLE_CLIENT_ID } from "@/common/constants/environmentVariables";
 
 // hooks
-import { CartProvider } from "@/hooks/useCart";
 import { CustomerAuthProvider } from "@/hooks/auth/useCustomerAuth";
+import { CartProvider } from "@/hooks/useCart";
 import { CustomerProfileProvider } from "@/hooks/useCustomerProfile";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { LocationProvider } from "@/hooks/useLocation/useLocation";
 import { SearchProvider } from "@/hooks/useSearch/useSearch";
 import { SettingProvider } from "@/hooks/useSetting/useSetting";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // types
 import { type ReactNode } from "react";
 
-export default async function ContextProvider({
+export default function ContextProvider({
   children
 }: {
   children: ReactNode;

@@ -7,44 +7,42 @@ import { OPTIMIZE_IMAGE } from "@/config/image";
 import moment from "moment";
 
 // icons
-import { ChevronLeftIcon, ChevronRightIcon, Star, StarIcon, Zap } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, Star } from "lucide-react";
 
 // animation
 import { ShineAnimation } from "../../../ShineAnimation/ShineAnimation";
 
 // constants
-import { FRONTEND_LINKS } from "@/common/routes/frontend/staticLinks";
 import { INRSymbol } from "@/common/constants/symbols";
+import { FRONTEND_LINKS } from "@/common/routes/frontend/staticLinks";
 import {
   NonVegSymbol,
   VegSymbol
 } from "@/components/(_common)/Symbols/Edibles";
 
 // utils
-import { alwaysDecimal } from "@/components/pages/(frontend)/Content/components/Details/helpers/alwaysDecimal";
 import { getChromaticallyAbberatedShade } from "@/common/helpers/getChromaticallyABberatedShade";
 import { getCityWiseContentPrices } from "@/common/helpers/getCityWiseContentPrices";
 
 // hooks
-import { useEffect, useId, useState } from "react";
 import { useAppStates } from "@/hooks/useAppState/useAppState";
+import { useEffect, useId, useState } from "react";
 
 // components
 import Image from "next/image";
 import Link from "next/link";
 
 // types
-import { type ColorDocument } from "@/common/types/documentation/presets/color";
 import { type ContentDocument } from "@/common/types/documentation/contents/content";
+import { type ImageDocument } from "@/common/types/documentation/media/image";
 import { type ContentDeliveryDocument } from "@/common/types/documentation/nestedDocuments/contentDelivery";
 import { type ContentQualityDocument } from "@/common/types/documentation/nestedDocuments/contentQuality";
-import { type ContentsSortType } from "@/components/pages/(frontend)/CategoryList/static/types";
-import { type DeliveryTypeDocument } from "@/common/types/documentation/presets/deliveryType";
-import { type ImageDocument } from "@/common/types/documentation/media/image";
 import { type EdibleDocument } from "@/common/types/documentation/nestedDocuments/edible";
+import { type ColorDocument } from "@/common/types/documentation/presets/color";
 import { type ProcessingTimeDocument } from "@/common/types/documentation/presets/processingTime";
 import { type PromotionTagDocument } from "@/common/types/documentation/presets/promotionTag";
 import { getRatingValue } from "@/components/(frontend)/content/utils/getRatingValue";
+import { type ContentsSortType } from "@/components/pages/(frontend)/CategoryList/static/types";
 
 export default function FrontendProductTilesUI({
   id,
@@ -78,27 +76,31 @@ export default function FrontendProductTilesUI({
   const [products, setProducts] = useState<ContentDocument[]>(
     productList || []
   );
-  const [screenW, setScreenW] = useState<number>(300);
+  const [screenW, setScreenW] = useState<number>(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   const useIdId = useId();
   const trayId = id || useIdId;
 
   useEffect(() => {
+    setIsMounted(true);
     const updateWindowWidth = () => {
-      setScreenW((prev) => innerWidth);
+      setScreenW(window.innerWidth);
     };
-    window.addEventListener("resize", updateWindowWidth);
     updateWindowWidth();
+    window.addEventListener("resize", updateWindowWidth);
     return () => window.removeEventListener("resize", updateWindowWidth);
   }, []);
 
   const handleScroll = (dir: "left" | "right") => {
     const tray = document.getElementById(trayId) as HTMLElement;
+    if (!tray) return;
 
     const currOffset = tray.scrollLeft;
+    const scrollAmount = screenW > 0 ? screenW * 0.65 : 300;
 
     tray.scrollTo({
-      left: currOffset + (dir === "left" ? -1 : 1) * (screenW * 0.65),
+      left: currOffset + (dir === "left" ? -1 : 1) * scrollAmount,
       behavior: "smooth"
     });
   };

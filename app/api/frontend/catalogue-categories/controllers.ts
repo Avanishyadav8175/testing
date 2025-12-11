@@ -9,9 +9,9 @@ const { Catalogues, CatalogueCategories } = models;
 import { handleError } from "@/common/utils/api/error";
 
 // types
-import { type CatalogueDocument } from "@/common/types/documentation/presets/catalogue";
-import { type CatalogueCategoryDocument } from "@/common/types/documentation/categories/catalogueCategory";
 import { type MongooseErrorType } from "@/common/types/apiTypes";
+import { type CatalogueCategoryDocument } from "@/common/types/documentation/categories/catalogueCategory";
+import { type CatalogueDocument } from "@/common/types/documentation/presets/catalogue";
 
 export const getCatalogueCategories = async (): Promise<
   CatalogueCategoryDocument[] | null
@@ -22,7 +22,7 @@ export const getCatalogueCategories = async (): Promise<
     const catalogueCategories = await CatalogueCategories.find({
       isActive: true
     })
-      .select(["name", "title"])
+      .select(["name", "title", "icon"])
       .populate([
         {
           path: "icon",

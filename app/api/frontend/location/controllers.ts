@@ -18,18 +18,19 @@ export const getCities = async (): Promise<CityDocument[] | null> => {
     await connectDB();
 
     const documents = await Cities.find({
-      isActive: true
+      isActive: true,
+      isDeleted: { $ne: true }
     })
       .select(["name", "aliases"])
-      .sort({ name: 1 });
+      .sort({ name: 1 })
+      .lean()
+      .exec();
 
-    if (!documents) {
-      return null;
-    }
-
-    return documents;
+    // Return empty array if no documents found (query succeeded but no results)
+    // Return null only on error
+    return (documents || []) as CityDocument[];
   } catch (error: any) {
-    console.error(handleError(error as MongooseErrorType));
+    console.error("Error fetching cities:", handleError(error as MongooseErrorType));
 
     return null;
   }

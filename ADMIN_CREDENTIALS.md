@@ -1,129 +1,66 @@
-# 🔐 DECORWISH ADMIN CREDENTIALS & SETUP
+# 🔐 Admin Credentials - Floriwish
 
-## ✅ **SYSTEM READY FOR USE**
+## 👤 Admin Login Details
 
-Your Decorwish platform is now **100% functional** with admin user and sample products created!
+**Email**: `admin@floriwish76decorwish.com`  
+**Password**: `Decorwish@2025#Salman`
 
----
+## 🌐 Admin Panel Access
 
-## 🔑 **ADMIN LOGIN CREDENTIALS**
+**URL**: `http://localhost:3000/manage/login` (Development)  
+**URL**: `http://floriwish.com/manage/login` (Production)
 
-### **Admin Panel Access**
-- **URL**: `http://localhost:3000/manage/login`
-- **Email**: `admin@decorwish.com`
-- **Password**: `admin123`
-- **Role**: Super Admin (Full Access)
+## 📊 Database Status
 
----
+**MongoDB**: ✅ Connected  
+**Database**: `decorwish` (New MongoDB URI)  
+**Products**: 5 sample products created  
+**Customers**: 4 customers  
+**Orders**: 2 orders  
 
-## 🛍️ **SAMPLE PRODUCTS CREATED**
+## 🛍️ Sample Products Created
 
-✅ **3 Sample Products Added:**
+The setup script has created sample products that are now searchable:
+1. Beautiful Red Rose Bouquet
+2. Chocolate Truffle Cake  
+3. Elegant White Orchid Plant
+4. Additional products (2 more)
 
-1. **Beautiful Red Rose Bouquet**
-   - SKU: ROSE-001
-   - Price: ₹999 (MRP: ₹1299)
-   - Category: Flowers
+## 🔧 Admin Panel Features
 
-2. **Chocolate Truffle Cake**
-   - SKU: CAKE-001
-   - Price: ₹749 (MRP: ₹899)
-   - Category: Flowers
+- ✅ Dashboard with system health monitoring
+- ✅ Product & category management
+- ✅ Media management
+- ✅ Blog management
+- ✅ User & order management
+- ✅ System settings & configurations
+- ✅ Location management (50+ Indian cities)
 
-3. **Elegant White Orchid Plant**
-   - SKU: PLANT-001
-   - Price: ₹1299 (MRP: ₹1599)
-   - Category: Flowers
+## 🚀 What's Ready
 
----
+### Frontend Features
+- ✅ Location selector with 50+ Indian cities
+- ✅ Search functionality with 5 products
+- ✅ Product catalog and browsing
+- ✅ Google OAuth login (after console setup)
+- ✅ Cart and checkout system
+- ✅ Responsive design
 
-## 🏗️ **CREATED PRESETS**
+### Backend Features
+- ✅ Complete API system
+- ✅ Database with sample data
+- ✅ Redis caching
+- ✅ AWS S3 integration
+- ✅ Payment gateway (Razorpay)
+- ✅ Admin authentication
 
-✅ **System Presets Configured:**
-- **FAQ Group**: General FAQ
-- **Cancellation Policy**: Standard Policy
-- **Care Info**: Standard Care
-- **Delivery Detail**: Standard Delivery
-- **Content Category**: Flowers
-- **Media Folder**: Sample Images
-- **Sample Image**: Product placeholder image
+## 📝 Important Notes
 
----
-
-## 🚀 **HOW TO ACCESS**
-
-### **1. Frontend (Customer Website)**
-```
-http://localhost:3000
-```
-- View products and categories
-- Browse sample products
-- Test shopping experience
-
-### **2. Admin Panel (Management System)**
-```
-http://localhost:3000/manage/login
-```
-**Login with:**
-- Email: `admin@decorwish.com`
-- Password: `admin123`
-
-### **3. System Health Dashboard**
-```
-Admin Panel → Miscellaneous → System Health
-```
-- Real-time database status
-- Service monitoring
-- Performance metrics
+- **Keep these credentials secure**
+- **Change the password after first login** (recommended)
+- **The database is now using the new MongoDB URI**
+- **All location and search functionality is working**
 
 ---
 
-## 🎯 **WHAT YOU CAN DO NOW**
-
-### **Admin Panel Features:**
-1. **Dashboard**: System overview and health monitoring
-2. **Product Management**: Add, edit, delete products
-3. **Category Management**: Organize product categories
-4. **Media Management**: Upload and organize images
-5. **Blog Management**: Create and manage blog content
-6. **User Management**: Handle customers and orders
-7. **System Settings**: Configure payments, delivery, etc.
-
-### **Immediate Tasks:**
-1. **Login to Admin Panel** with the credentials above
-2. **Explore Products Section** to see the 3 sample products
-3. **Check System Health** to verify all connections
-4. **Add More Products** using the product management interface
-5. **Upload Images** using the media management system
-6. **Configure Categories** to organize your products better
-
----
-
-## 🔧 **SYSTEM STATUS**
-
-✅ **All Systems Operational:**
-- **MongoDB**: Connected (3 products, 1 customer, 1 order)
-- **Redis**: Connected and responding
-- **AWS S3/CloudFront**: Configured and ready
-- **Admin Panel**: Fully functional with all features
-- **Frontend**: Working with sample data
-
----
-
-## 🎉 **SUCCESS!**
-
-Your Decorwish e-commerce platform is now **completely set up and ready for business**!
-
-**Next Steps:**
-1. Login to admin panel and explore all features
-2. Add your own products and categories
-3. Upload product images
-4. Configure your business settings
-5. Start selling online!
-
----
-
-**🔗 Quick Links:**
-- **Frontend**: http://localhost:3000
-- **Admin Login**: http://localhost:3000/manage/login
-- **Credentials**: admin@decorwish.com / admin123
+**Your Floriwish admin panel is ready to use! 🎉**

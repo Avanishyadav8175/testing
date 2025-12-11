@@ -8,11 +8,18 @@ type FileProps = FileCommonProps & (FileAddVariantProps | FileDeleteVariantProps
 type FolderProps = { type: "add" | "delete"; folderName: string; };
 
 const CLOUDFRONT_URL = process.env.AWS_CLOUDFRONT_URL || "";
+const AWS_REGION = process.env.AWS_REGION || "ap-south-1";
+const AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME || "floriwish-media-bucket";
 
 const addFile = async ({ folderName, fileType, fileName, buffer, extension }: { folderName: string; fileType: "image"; fileName: string; buffer: Buffer; extension: string; }): Promise<string> => {
   try {
     await s3.file.add({ directoryName: folderName, fileType, fileName, buffer, extension });
-    return `${CLOUDFRONT_URL}/${folderName}/${fileName}`;
+    
+    // Use direct S3 URL instead of CloudFront until CloudFront is properly configured
+    const s3Url = `https://${AWS_S3_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${folderName}/${fileName}`;
+    
+    // Return S3 URL for now (CloudFront needs proper configuration)
+    return s3Url;
   } catch (error: any) {
     console.error(error.message);
     return "";

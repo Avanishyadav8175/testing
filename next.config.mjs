@@ -18,6 +18,18 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'd3lno5tuwkddps.cloudfront.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'd22rebqllszdz8.cloudfront.net',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.cloudfront.net',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.s3.*.amazonaws.com',
+      },
     ],
   },
   async headers() {

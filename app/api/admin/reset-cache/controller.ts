@@ -1,16 +1,27 @@
+import { ALL_CACHE_KEY } from "@/common/constants/cacheKeys";
+import { flush } from "@/db/redis/methods";
 import { cloudfront } from "@/lib/aws";
 import { revalidateTag } from "next/cache";
-import { flush } from "@/db/redis/methods";
-import { ALL_CACHE_KEY } from "@/common/constants/cacheKeys";
 
 export const resetAllCache = async (): Promise<boolean> => {
   try {
+    // Clear Redis cache
     await flush();
-   // revalidateTag(ALL_CACHE_KEY);
-   // await cloudfront.cache.clear({ path: "/*" });
+
+    // Revalidate Next.js cache
+    revalidateTag(ALL_CACHE_KEY);
+
+    // Clear Cloudfront cache (if configured)
+    try {
+      await cloudfront.cache.clear({ path: "/*" });
+    } catch (cloudfrontError) {
+      console.warn("Cloudfront cache clear failed (may not be configured):", cloudfrontError);
+    }
+
     return true;
   }
-  catch {
+  catch (error) {
+    console.error("Error resetting all cache:", error);
     return false;
   }
 };

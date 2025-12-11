@@ -1,11 +1,11 @@
+import { IS_USER_LOGGEDIN } from "@/common/constants/sessionKeys";
 import { SetStateType } from "@/common/types/reactTypes";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
-import FrontendAuthUIWrapper from "./components/uiWrapper";
-import FrontendAuthFirstSlide from "./components/InitialAuthSlide";
 import EmailAuthSlide from "./components/EmailAuthSlide";
+import FrontendAuthFirstSlide from "./components/InitialAuthSlide";
 import MobileAuthSlide from "./components/MobileAuthSlide";
-import { IS_USER_LOGGEDIN } from "@/common/constants/sessionKeys";
+import FrontendAuthUIWrapper from "./components/uiWrapper";
 
 export type AuthMethodType = "email" | "mobile" | "google" | "whatsapp";
 export type AuthInputsType = {
@@ -25,7 +25,7 @@ export default function FrontendAuth({
   callback?: () => void;
 }) {
   const [currAuthMethod, setCurrAuthMethod] =
-    useState<AuthMethodType>("mobile");
+    useState<AuthMethodType>("google"); // ✔ Default to Google Sign-In
   const [authInputs, setAuthInputs] = useState<AuthInputsType>({
     email: { email: "" },
     mobile: { number: "" },

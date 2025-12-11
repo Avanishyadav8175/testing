@@ -32,7 +32,8 @@ export default function Categories({
   asPreview?: boolean;
   asCategoryPageQuickLink?: boolean;
 }) {
-  const [screenW, setScreenW] = useState<number>(300);
+  const [screenW, setScreenW] = useState<number>(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   const trayId = useId();
 
@@ -43,21 +44,24 @@ export default function Categories({
 
   const handleScroll = (dir: "left" | "right") => {
     const tray = document.getElementById(trayId) as HTMLElement;
+    if (!tray) return;
 
     const currOffset = tray.scrollLeft;
+    const scrollAmount = screenW > 0 ? screenW * 0.65 : 300;
 
     tray.scrollTo({
-      left: currOffset + (dir === "left" ? -1 : 1) * (screenW * 0.65),
+      left: currOffset + (dir === "left" ? -1 : 1) * scrollAmount,
       behavior: "smooth"
     });
   };
 
   useEffect(() => {
+    setIsMounted(true);
     const updateWindowWidth = () => {
-      setScreenW((prev) => innerWidth);
+      setScreenW(window.innerWidth);
     };
-    window.addEventListener("resize", updateWindowWidth);
     updateWindowWidth();
+    window.addEventListener("resize", updateWindowWidth);
     return () => window.removeEventListener("resize", updateWindowWidth);
   }, []);
 
@@ -102,14 +106,18 @@ export default function Categories({
               className={`relative overflow-hidden bg-charcoal-3/20 w-full ${shape === "square" ? "rounded-xl aspect-square" : asCategoryPageQuickLink ? "rounded-lg aspect-[4/3] sm:aspect-video" : "rounded-full aspect-square"} ${shape === "circle" && !asCategoryPageQuickLink ? "ring-2 sm:ring-4 ring-offset-[3px] sm:ring-offset-4 ring-sienna/70" : ""}  grid place-items-center overflow-hidden relative`}
             >
               <Image
-                src={url}
+                src={url || "/placeholder.png"}
                 alt={alt || "Category Image"}
                 width={500}
                 height={500}
                 quality={25}
                 unoptimized={!OPTIMIZE_IMAGE}
                 draggable={false}
-                className={`w-full h-full object-cover object-center scale-105 group-hover:scale-100 transition-all duration-300 ${shape === "circle" ? "" : "border border-transparent group-hover:border-sienna rounded-xl"} `}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "/placeholder.png";
+                }}
+                className={`w-full h-full object-contain object-center scale-105 group-hover:scale-100 transition-all duration-300 ${shape === "circle" ? "" : "border border-transparent group-hover:border-sienna rounded-xl"}`}
               />
               <ShineAnimation />
             </div>

@@ -1,37 +1,35 @@
 "use client";
 
 // config
-import { OPTIMIZE_IMAGE } from "@/config/image";
 
 // icons
 import { PaintBucket, Tag, UserRound } from "lucide-react";
 
 // components
+import { DOMAIN } from "@/common/constants/domain";
+import {
+  getBlogArticleSections
+} from "@/common/helpers/generateStaticBlogData";
+import { BlogArticleDocument } from "@/common/types/documentation/blog/blogArticle";
+import { BlogAuthorDocument } from "@/common/types/documentation/blog/blogAuthor";
+import { BlogCategoryDocument } from "@/common/types/documentation/blog/blogCategory";
+import { BlogTagDocument } from "@/common/types/documentation/blog/blogTag";
+import { ContentDocument } from "@/common/types/documentation/contents/content";
+import { ImageDocument } from "@/common/types/documentation/media/image";
+import { SchemaDataType } from "@/common/types/seoTypes";
+import { SchemaOrgScripts } from "@/common/utils/schema/SchemaOrgScripts";
+import BoxTheme from "@/components/(frontend)/global/_Templates/BoxTheme/BoxTheme";
+import FAQs from "@/components/(frontend)/global/_Templates/FAQs/FAQs";
+import FrontendProductTiles from "@/components/(frontend)/global/_Templates/Tiles/ProductTiles/FrontendProductTiles";
+import { LocationProvider } from "@/hooks/useLocation/useLocation";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import BlogArticleContent from "./components/BlogArticleContent";
 import {
   BlogH1Heading,
   BlogShareButton,
   BlogTags
 } from "./components/TopSection";
-import { DOMAIN } from "@/common/constants/domain";
-import FAQs from "@/components/(frontend)/global/_Templates/FAQs/FAQs";
-import { BlogArticleDocument } from "@/common/types/documentation/blog/blogArticle";
-import { useEffect, useState } from "react";
-import {
-  getBlogArticleSections,
-  getFrontendBlogArticleSections
-} from "@/common/helpers/generateStaticBlogData";
-import BlogArticleContent from "./components/BlogArticleContent";
-import { BlogAuthorDocument } from "@/common/types/documentation/blog/blogAuthor";
-import { BlogCategoryDocument } from "@/common/types/documentation/blog/blogCategory";
-import { BlogTagDocument } from "@/common/types/documentation/blog/blogTag";
-import { ContentDocument } from "@/common/types/documentation/contents/content";
-import BoxTheme from "@/components/(frontend)/global/_Templates/BoxTheme/BoxTheme";
-import FrontendProductTiles from "@/components/(frontend)/global/_Templates/Tiles/ProductTiles/FrontendProductTiles";
-import { LocationProvider } from "@/hooks/useLocation/useLocation";
-import { SchemaDataType } from "@/common/types/seoTypes";
-import { ImageDocument } from "@/common/types/documentation/media/image";
-import moment from "moment";
-import { SchemaOrgScripts } from "@/common/utils/schema/SchemaOrgScripts";
 
 export default function BlogArticle({
   blogArticle: {
@@ -85,7 +83,7 @@ export default function BlogArticle({
       },
       blogPosting: {
         url: `${DOMAIN}${slug.startsWith("/") ? slug : "/" + slug}`,
-        authorName: (author as BlogAuthorDocument).name,
+        authorName: (author as BlogAuthorDocument)?.name || "Anonymous",
         description: meta.description || "",
         headline: heading,
         publishedOn: moment(createdAt).format("DD MMMM YYYY"),
@@ -171,7 +169,7 @@ export default function BlogArticle({
                 <span>Author:</span>
               </span>
               <span className="font-medium ml-7 sm:ml-1">
-                {(author as BlogAuthorDocument).name}
+                {(author as BlogAuthorDocument)?.name || "Anonymous"}
               </span>
 
               {categories && categories.length ? (

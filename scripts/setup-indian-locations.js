@@ -1,5 +1,7 @@
+const citiesData = require("./indian-cities-data");
+
 const API_KEY = "1tNMPQvO5jA8EgR2sJLI2MGoPKYqgo";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000";
 
 async function makeRequest(endpoint, method = "GET", body = null) {
     try {
@@ -36,59 +38,20 @@ const indianStates = [
     "Lakshadweep", "Andaman and Nicobar Islands"
 ];
 
-// 50 major Indian cities with their states
-const indianCities = [
-    { name: "Mumbai", state: "Maharashtra", isTopCity: true },
-    { name: "Delhi", state: "Delhi", isTopCity: true },
-    { name: "Bangalore", state: "Karnataka", isTopCity: true, aliases: ["Bengaluru"] },
-    { name: "Hyderabad", state: "Telangana", isTopCity: true },
-    { name: "Ahmedabad", state: "Gujarat", isTopCity: true },
-    { name: "Chennai", state: "Tamil Nadu", isTopCity: true },
-    { name: "Kolkata", state: "West Bengal", isTopCity: true },
-    { name: "Surat", state: "Gujarat", isTopCity: true },
-    { name: "Pune", state: "Maharashtra", isTopCity: true },
-    { name: "Jaipur", state: "Rajasthan", isTopCity: true },
-    { name: "Lucknow", state: "Uttar Pradesh", isTopCity: true },
-    { name: "Kanpur", state: "Uttar Pradesh", isTopCity: true },
-    { name: "Nagpur", state: "Maharashtra", isTopCity: true },
-    { name: "Indore", state: "Madhya Pradesh", isTopCity: true },
-    { name: "Thane", state: "Maharashtra", isTopCity: false },
-    { name: "Bhopal", state: "Madhya Pradesh", isTopCity: true },
-    { name: "Visakhapatnam", state: "Andhra Pradesh", isTopCity: true, aliases: ["Vizag"] },
-    { name: "Pimpri-Chinchwad", state: "Maharashtra", isTopCity: false },
-    { name: "Patna", state: "Bihar", isTopCity: true },
-    { name: "Vadodara", state: "Gujarat", isTopCity: true, aliases: ["Baroda"] },
-    { name: "Ghaziabad", state: "Uttar Pradesh", isTopCity: false },
-    { name: "Ludhiana", state: "Punjab", isTopCity: true },
-    { name: "Agra", state: "Uttar Pradesh", isTopCity: true },
-    { name: "Nashik", state: "Maharashtra", isTopCity: true },
-    { name: "Faridabad", state: "Haryana", isTopCity: false },
-    { name: "Meerut", state: "Uttar Pradesh", isTopCity: false },
-    { name: "Rajkot", state: "Gujarat", isTopCity: true },
-    { name: "Kalyan-Dombivali", state: "Maharashtra", isTopCity: false },
-    { name: "Vasai-Virar", state: "Maharashtra", isTopCity: false },
-    { name: "Varanasi", state: "Uttar Pradesh", isTopCity: true, aliases: ["Benares", "Kashi"] },
-    { name: "Srinagar", state: "Jammu and Kashmir", isTopCity: true },
-    { name: "Aurangabad", state: "Maharashtra", isTopCity: true },
-    { name: "Dhanbad", state: "Jharkhand", isTopCity: false },
-    { name: "Amritsar", state: "Punjab", isTopCity: true },
-    { name: "Navi Mumbai", state: "Maharashtra", isTopCity: false },
-    { name: "Allahabad", state: "Uttar Pradesh", isTopCity: true, aliases: ["Prayagraj"] },
-    { name: "Ranchi", state: "Jharkhand", isTopCity: true },
-    { name: "Howrah", state: "West Bengal", isTopCity: false },
-    { name: "Coimbatore", state: "Tamil Nadu", isTopCity: true },
-    { name: "Jabalpur", state: "Madhya Pradesh", isTopCity: true },
-    { name: "Gwalior", state: "Madhya Pradesh", isTopCity: true },
-    { name: "Vijayawada", state: "Andhra Pradesh", isTopCity: true },
-    { name: "Jodhpur", state: "Rajasthan", isTopCity: true },
-    { name: "Madurai", state: "Tamil Nadu", isTopCity: true },
-    { name: "Raipur", state: "Chhattisgarh", isTopCity: true },
-    { name: "Kota", state: "Rajasthan", isTopCity: true },
-    { name: "Chandigarh", state: "Chandigarh", isTopCity: true },
-    { name: "Guwahati", state: "Assam", isTopCity: true },
-    { name: "Solapur", state: "Maharashtra", isTopCity: false },
-    { name: "Hubli-Dharwad", state: "Karnataka", isTopCity: true }
-];
+// Build comprehensive cities list from citiesData
+const indianCities = [];
+for (const [stateName, cities] of Object.entries(citiesData)) {
+    for (const city of cities) {
+        indianCities.push({
+            name: city.name,
+            state: stateName,
+            isTopCity: city.isTopCity || false,
+            aliases: city.aliases || []
+        });
+    }
+}
+
+console.log(`📊 Total cities to add: ${indianCities.length}`);
 
 async function setupIndianLocations() {
     console.log("🇮🇳 Setting up Indian States and Cities...\n");
@@ -204,13 +167,14 @@ async function setupIndianLocations() {
     console.log("\n🎉 Indian Locations Setup Complete!");
     console.log("\n📝 What was added:");
     console.log("- 36 Indian states and union territories");
-    console.log("- 50 major Indian cities");
+    console.log(`- ${indianCities.length} Indian cities (comprehensive list)`);
     console.log("- Top cities marked for priority display");
     console.log("- City aliases for better search");
     console.log("\n🔧 Usage:");
     console.log("- Cities are now available for delivery location selection");
     console.log("- Top cities will appear first in dropdowns");
     console.log("- Aliases help with search functionality");
+    console.log(`\n📈 Summary: ${citiesCreated} created, ${citiesSkipped} already existed, ${citiesFailed} failed`);
 }
 
 // Run the setup

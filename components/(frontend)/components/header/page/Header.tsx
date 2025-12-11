@@ -44,76 +44,85 @@ export type SearchBarInitialContentsType = {
 async function Header({ searchResults }: { searchResults: SearchBarInitialContentsType | null }) {
   // const navLinks: HeaderNavLinkDocument[] = await getNavLinks();
   const navLinks: HeaderNavLinkDocument[] = [
-    {
-      label: "WEDDINGS",
-      order: 1,
-      sections: [
-        {
-          heading: "Wedding Top Picks",
-          links: [
-            { label: "Wedding House Decoration", path: `/wedding-house-decoration` },
-            { label: "Wedding Car Decorations", path: `/wedding-car-decorations` },
-            { label: "Wedding Varmala", path: `/wedding-varmala` },
-          ] as HeaderNavLinkSectionLinkDocument[]
-        }
-      ] as HeaderNavLinkSectionDocument[]
-    },
-    {
-      label: "FLOWERS",
-      order: 2,
-      sections: [
-        {
-          heading: "Flowers Top Picks",
-          links: [
-            { label: "Chocolate Flower Bouquet", path: `/chocolate-flower-bouquet` },
-            { label: "Orchids Flower Bouquet", path: `/orchids-flower-bouquet` },
-            { label: "Gerbera Flower Bouquet", path: `/gerbera-flower-bouquet` },
-            { label: "Pink Rose Flowers Bouquet", path: `/pink-rose-flowers-bouquet` },
-            { label: "White Roses Flower Bouquet", path: `/white-roses-flower-bouquet` },
-            { label: "Yellow Roses Flowers Bouquet", path: `/yellow-roses-flowers-bouquet` },
-          ] as HeaderNavLinkSectionLinkDocument[]
-        }
-      ] as HeaderNavLinkSectionDocument[]
-    },
-    // {
-    //   label: "Cakes",
-    //   order: 3,
-    //   sections: [
-    //     {
-    //       heading: "",
-    //       links: [
+ {
+    label: "Flowers",
+    order: 1,
+    sections: [
+      {
+        heading: "Flowers Services",
+        links: [
+          { label: "All Flowers ", path: "/flowers" },
+          { label: "Red Rose", path: "/red-rose" },
+          { label: "Pink Rose", path: "/pink-rose" },
+          { label: "Yellow Rose", path: "/yellow-rose" },
+          { label: "Carnations", path: "/carnations-flower" },
+          { label: "Lily", path: "/lily-flower" },
+          { label: "Gerberas", path: "/gerberas-flower" },
+          { label: "Orchids", path: "/orchids-flower" },
+          { label: "White Rose", path: "/white-rose" },
+          { label: "Chocolate Bouquet", path: "/chocolate-bouquet" },
+        ],
+      },
+    ],
+  },
+     {
+    label: "Cakes",
+    order: 4,
+    sections: [
+      {
+        heading: "Cakes",
+        links: [{ label: "All cakes", path: "/cakes" }],
+      },
+    ],
+  },
+      {
+    label: "Balloon Decor",
+    order: 5,
+    sections: [
+      {
+        heading: " Balloon Decoration",
+        links: [{ label: "All Balloon Decoration", path: "/balloon-decoration" }],
+      },
+    ],
+  },
 
-    //       ] as HeaderNavLinkSectionLinkDocument[]
-    //     }
-    //   ] as HeaderNavLinkSectionDocument[]
-    // },
-    // {
-    //   label: "Balloons",
-    //   order: 4,
-    //   sections: [
-    //     heading: "",
-    //     links: [
+     {
+    label: "Wedding",
+    order: 6,
+    sections: [
+      {
+        heading: "Wedding Services",
+        links: [
+          { label: "First Night Room Decoration", path: "/first-night-room-decoration" },
+          { label: "Jaimala / Varmala", path: "/wedding-varmala-jaimala" },
+          { label: "Wedding Car Decor", path: "/wedding-car-decorations" },
+          { label: "Haldi Decoration", path: "/haldi-decoration-service" },
+          { label: "Mehndi Decoration", path: "/mehndi-decoration-service" },
+        ],
+      },
+    ],
+  },
 
-    //     ]
-    //   ] as HeaderNavLinkSectionDocument[]
-    // },
-    {
-      label: "GIFTS",
-      order: 5,
-      sections: [
+   {
+    label: "Personalized",
+    order: 7,
+    sections: [
+      {
+        heading: "Comming Soon",
+        links: [],
+      },
+    ],
+  },
         {
-          heading: "Flowers Top Picks",
-          links: [
-            { label: "Chocolate Flower Bouquet", path: `/chocolate-flower-bouquet` },
-            { label: "Orchids Flower Bouquet", path: `/orchids-flower-bouquet` },
-            { label: "Gerbera Flower Bouquet", path: `/gerbera-flower-bouquet` },
-            { label: "Pink Rose Flowers Bouquet", path: `/pink-rose-flowers-bouquet` },
-            { label: "White Roses Flower Bouquet", path: `/white-roses-flower-bouquet` },
-            { label: "Yellow Roses Flowers Bouquet", path: `/yellow-roses-flowers-bouquet` },
-          ] as HeaderNavLinkSectionLinkDocument[]
-        }
-      ] as HeaderNavLinkSectionDocument[]
-    },
+    label: "Premium",
+    order: 8,
+    sections: [
+      {
+        heading: "All Premium Gifting in India",
+        links: [{ label: "Premium Gift", path: "/flowers/india" }],
+      },
+    ],
+  },
     // {
     //   label: "Hampers",
     //   order: 6,

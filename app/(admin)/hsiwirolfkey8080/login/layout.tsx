@@ -1,11 +1,11 @@
 "use client";
-import { ArrowLeft, ChevronLeft } from "lucide-react";
 import { ADMIN_VERIFIED } from "@/common/constants/cookieKeys";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { type Children } from "@/common/types/reactTypes";
 import { ROOT_ADMIN_ROUTE } from "@/common/routes/admin/staticLinks";
+import { type Children } from "@/common/types/reactTypes";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function AdminLoginLayout({ children }: { children: Children }) {
   const { replace } = useRouter();
@@ -25,7 +25,7 @@ export default function AdminLoginLayout({ children }: { children: Children }) {
       </div>
 
       <div className="bg-ivory-1 flex flex-col p-5 sm:p-7 items-stretch justify-center">
-        <div className="text-2xl text-ash-3 p-2 mb-4">Manager login</div>
+        <div className="text-2xl text-ash-3 p-2 mb-4">Admin Login</div>
         <div className="w-full grid grid-cols-1 grid-rows-[repeat(4,auto)] sm:gap-1 sm:px-1">
           {children}
           <div className="row-start-4 flex items-center justify-center text-sm">

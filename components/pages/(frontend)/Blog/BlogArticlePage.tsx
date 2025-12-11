@@ -1,23 +1,17 @@
 // libraries
 import moment from "moment";
-import { v4 as uuid } from "uuid";
 
 // constants
-import { DOMAIN } from "@/common/constants/environmentVariables";
-import { GOOGLE_ANALYTICS_ID } from "@/common/constants/environmentVariables";
+import { DOMAIN, GOOGLE_ANALYTICS_ID } from "@/common/constants/environmentVariables";
 
 // utils
-import { extractBlogCoverImage } from "@/components/(blog)/content/BlogPage/utils/extractBlogCoverImage";
 
 // components
-import BlogAuthor from "@/components/(frontend)/blog/BlogAuthor";
-import BlogCard from "@/components/(blog)/content/BlogPage/components/BlogCard";
-import BlogCategories from "@/components/(frontend)/blog/BlogCategories";
-import BlogLayout from "@/components/(frontend)/blog/layout/BlogLayout";
-import BlogShare from "@/components/(frontend)/blog/BlogShare";
-import BlogTags from "@/components/(frontend)/blog/BlogTags";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { SchemaOrgScripts } from "@/common/utils/schema/SchemaOrgScripts";
+import BlogCategories from "@/components/(frontend)/blog/BlogCategories";
+import BlogShare from "@/components/(frontend)/blog/BlogShare";
+import BlogLayout from "@/components/(frontend)/blog/layout/BlogLayout";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 // types
 import { type BlogArticleDocument } from "@/common/types/documentation/blog/blogArticle";
@@ -26,9 +20,8 @@ import { type BlogCategoryDocument } from "@/common/types/documentation/blog/blo
 import { type BlogTagDocument } from "@/common/types/documentation/blog/blogTag";
 import { type ImageDocument } from "@/common/types/documentation/media/image";
 import { type SchemaDataType } from "@/common/types/seoTypes";
-import { type BlogCard as BlogCardType } from "@/components/(blog)/content/BlogPage/types/blogCard";
 
-export default function BlogArticlePage({
+function BlogArticlePage({
   article
 }: {
   article: BlogArticleDocument;
@@ -36,7 +29,7 @@ export default function BlogArticlePage({
   const { heading, slug, layouts: unsortedLayouts, meta, createdAt } = article;
 
   const url = `${DOMAIN}/blog/${slug}`;
-  const author = article.author as BlogAuthorDocument;
+  const author = article.author as BlogAuthorDocument | null;
   const categories = article.categories as BlogCategoryDocument[];
   const tags = article.tags as BlogTagDocument[];
   const layouts = [...unsortedLayouts].sort((a, b) => a.order - b.order);
@@ -55,7 +48,7 @@ export default function BlogArticlePage({
       },
       blogPosting: {
         url,
-        authorName: author.name,
+        authorName: author?.name || "Anonymous",
         description: meta.description || "",
         headline: heading,
         publishedOn: moment(createdAt).format("DD MMMM YYYY"),
@@ -164,3 +157,5 @@ export default function BlogArticlePage({
     </>
   );
 }
+
+export default BlogArticlePage;

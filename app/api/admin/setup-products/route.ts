@@ -193,6 +193,7 @@ export async function POST(request: NextRequest) {
           deliveryDetail: deliveryDetail._id
         },
         
+        isActive: true,
         createdBy: "system",
         updatedBy: "system"
       },
@@ -253,6 +254,7 @@ export async function POST(request: NextRequest) {
           deliveryDetail: deliveryDetail._id
         },
         
+        isActive: true,
         createdBy: "system",
         updatedBy: "system"
       },
@@ -313,6 +315,7 @@ export async function POST(request: NextRequest) {
           deliveryDetail: deliveryDetail._id
         },
         
+        isActive: true,
         createdBy: "system",
         updatedBy: "system"
       }

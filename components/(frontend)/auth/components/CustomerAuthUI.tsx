@@ -21,7 +21,7 @@ function CustomerAuthUI() {
       <SettingProvider>
         <CustomerAuthProvider>
           <div className="flex flex-col items-start justify-center w-device px-4 my-10 sm:w-[500px] z-[10000]">
-            <span className="font-medium text-2xl text-sienna">
+            <span className="font-medium  text-2xl text-sienna">
               Welcome to {COMPANY_NAME}
             </span>
             <span className="font-medium text-base text-charcoal-3 pt-1.5">

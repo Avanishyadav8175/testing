@@ -9,8 +9,8 @@ import BlogCard from "./BlogCard";
 
 // types
 import { type BlogArticleDocument } from "@/common/types/documentation/blog/blogArticle";
-import { type BlogCard as BlogCardType } from "../types/blogCard";
 import { type BlogAuthorDocument } from "@/common/types/documentation/blog/blogAuthor";
+import { type BlogCard as BlogCardType } from "../types/blogCard";
 
 export default async function BlogCards({
   title,
@@ -25,14 +25,12 @@ export default async function BlogCards({
     return <></>;
   }
 
-  const cards: BlogCardType[] = blogs.map(
-    ({ heading, slug, layouts, author }) => ({
-      title: heading,
-      path: `/blog/${slug}`,
-      coverImage: extractBlogCoverImage(layouts),
-      authorName: (author as BlogAuthorDocument).name
-    })
-  );
+  const cards: BlogCardType[] = blogs.map(({ heading, slug, layouts, author }) => ({
+    title: heading,
+    path: `/blog/${slug}`,
+    coverImage: extractBlogCoverImage(layouts),
+    authorName: (author as BlogAuthorDocument)?.name || "Anonymous"
+  }));
 
   return (
     <section

@@ -2,18 +2,13 @@
 import { memo } from "react";
 
 // components
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from "@/components/ui/accordion";
-import Catalogue from "./Catalogue";
 import Image from "next/image";
+import Catalogue from "./Catalogue";
 
 // types
-import { type CatalogueDocument } from "@/common/types/documentation/presets/catalogue";
 import { type CatalogueCategoryDocument } from "@/common/types/documentation/categories/catalogueCategory";
 import { type ImageDocument } from "@/common/types/documentation/media/image";
+import { type CatalogueDocument } from "@/common/types/documentation/presets/catalogue";
 import CustomFAQ from "../../header/page/components/MobileDrawer/components/CustomFAQ";
 
 function CatalogueCategory({
@@ -23,20 +18,22 @@ function CatalogueCategory({
   catalogueCategory: CatalogueCategoryDocument;
   onClose: () => void;
 }) {
-  const { alt, url } = icon as ImageDocument;
+  const iconData = icon as ImageDocument | undefined;
   const catalogues = _catalogues as CatalogueDocument[];
 
   return (
     <CustomFAQ
       q={
         <div className="flex items-center justify-start gap-4">
-          <Image
-            src={url}
-            alt={alt || name}
-            width={64}
-            height={64}
-            className="rounded-full"
-          />
+          {iconData?.url && (
+            <Image
+              src={iconData.url}
+              alt={iconData.alt || name}
+              width={64}
+              height={64}
+              className="rounded-full"
+            />
+          )}
           <div className="flex flex-col items-start justify-center">
             <span className="text-lg line-clamp-1">{name}</span>
             <span className="line-clamp-1">{title}</span>

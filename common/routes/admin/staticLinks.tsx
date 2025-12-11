@@ -13,7 +13,7 @@ import {
   Users
 } from "lucide-react";
 
-export const ROOT_ADMIN_ROUTE = "/manage";
+export const ROOT_ADMIN_ROUTE = "/hsiwirolfkey8080";
 
 export const ADMIN_PANEL_ALL_ROUTES: AdminPanelRoutes = [
   // DASHBOARD ============================================

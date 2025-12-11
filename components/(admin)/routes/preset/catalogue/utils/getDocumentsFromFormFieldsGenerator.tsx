@@ -5,14 +5,31 @@ interface FormFields extends HTMLFormControlsCollection {
   icon: HTMLInputElement;
 }
 
-const getDocumentsFromFormFieldsGenerator = () => (elements: FormFields) => ({
-  // category: elements.category.value,
-  category: "685513670cffa31fddf42662",
-  name: elements.name.value,
-  path: elements.path.value,
-  icon: elements.icon.value,
-  createdBy: "",
-  updatedBy: ""
-});
+const getDocumentsFromFormFieldsGenerator = () => {
+  return (elements: FormFields) => {
+    const category = elements.category?.value;
+    const icon = elements.icon?.value;
+
+    if (!category) {
+      alert("Category is required. Please select a category.");
+      throw new Error("Category is required. Please select a category.");
+    }
+
+    if (!icon) {
+      alert("Icon is required. Please select an icon image.");
+      throw new Error("Icon is required. Please select an icon image.");
+    }
+
+    return {
+      category,
+      name: elements.name.value,
+      path: elements.path.value,
+      icon,
+      isActive: true,
+      createdBy: "admin",
+      updatedBy: "admin"
+    };
+  };
+};
 
 export default getDocumentsFromFormFieldsGenerator;

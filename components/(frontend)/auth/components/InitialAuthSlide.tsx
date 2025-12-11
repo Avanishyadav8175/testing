@@ -1,6 +1,5 @@
-import { WhatsappSVG } from "@/common/svgs/svg";
 import { SetStateType } from "@/common/types/reactTypes";
-import { LoaderCircle, Mail, Smartphone } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { AuthInputsType, AuthMethodType } from "../FrontendAuth";
 
 export default function FrontendAuthFirstSlide({
@@ -77,32 +76,25 @@ export default function FrontendAuthFirstSlide({
                 setAuthInputs((prev) =>
                   currAuthMethod === "mobile"
                     ? {
-                        ...prev,
-                        mobile: update
-                      }
+                      ...prev,
+                      mobile: update
+                    }
                     : {
-                        ...prev,
-                        whatsapp: update
-                      }
+                      ...prev,
+                      whatsapp: update
+                    }
                 );
               }}
               className="w-[calc(100dvw_-_117px)] sm:w-[calc(400px_-_117px)]  border border-ash-3/40 text-charcoal-3 outline-none bg-transparent autofill:bg-transparent transition-all duration-300 placeholder:text-charcoal-3/60 hover:border-ash-3/80 focus:outline-1 focus:outline-offset-2 focus:outline-ash-3/60"
             />
           </>
         )}
+        {/* ❌ OTP Button Removed - Only Google Login Available */}
         {currAuthMethod !== "google" ? (
           <div
-            onClick={!showLoader ? onClick : () => {}}
+            onClick={!showLoader ? onClick : () => { }}
             className={`col-span-2 bg-sienna text-white flex items-center justify-center gap-x-2 cursor-pointer transition-all duration-300 ${showLoader ? "brightness-75" : ""}`}
           >
-            {currAuthMethod === "whatsapp" && !showLoader ? (
-              <WhatsappSVG
-                className=""
-                dimensions={24}
-              />
-            ) : (
-              <></>
-            )}
             {showLoader ? (
               <LoaderCircle
                 strokeWidth={1.5}
@@ -124,12 +116,13 @@ export default function FrontendAuthFirstSlide({
 
       {/* other auth methods --------------------------------- */}
       <div className="flex items-center justify-center gap-x-12 gap-y-3">
-        {currAuthMethod === "mobile" ? (
+        {/* ❌ Mobile Login Disabled */}
+        {/* {currAuthMethod === "mobile" ? (
           <></>
         ) : (
           <OtherAuthType
             label="Mobile"
-            onClick={() => setCurrAuthMethod((prev) => "mobile")}
+            onClick={() => setCurrAuthMethod("mobile")}
             svg={
               <Smartphone
                 strokeWidth={1.5}
@@ -137,13 +130,15 @@ export default function FrontendAuthFirstSlide({
               />
             }
           />
-        )}
-        {currAuthMethod === "whatsapp" ? (
+        )} */}
+
+        {/* ❌ WhatsApp Login Disabled */}
+        {/* {currAuthMethod === "whatsapp" ? (
           <></>
         ) : (
           <OtherAuthType
             label="Whatsapp"
-            onClick={() => setCurrAuthMethod((prev) => "whatsapp")}
+            onClick={() => setCurrAuthMethod("whatsapp")}
             svg={
               <WhatsappSVG
                 strokeWidth={1.5}
@@ -152,22 +147,26 @@ export default function FrontendAuthFirstSlide({
               />
             }
           />
-        )}
+        )} */}
+
+        {/* ✔ Google Login - Only Active Method */}
         {currAuthMethod === "google" ? (
           <></>
         ) : (
           <OtherAuthType
             label="Google"
-            onClick={() => setCurrAuthMethod((prev) => "google")}
+            onClick={() => setCurrAuthMethod("google")}
             svg={<span className="text-3xl scale-90 ">G</span>}
           />
         )}
-        {currAuthMethod === "email" ? (
+
+        {/* ❌ Email Login Disabled */}
+        {/* {currAuthMethod === "email" ? (
           <></>
         ) : (
           <OtherAuthType
             label="Email"
-            onClick={() => setCurrAuthMethod((prev) => "email")}
+            onClick={() => setCurrAuthMethod("email")}
             svg={
               <Mail
                 strokeWidth={1.5}
@@ -175,7 +174,7 @@ export default function FrontendAuthFirstSlide({
               />
             }
           />
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -8,16 +8,16 @@ import { GOOGLE_ANALYTICS_ID } from "@/common/constants/environmentVariables";
 // components
 import BlogCards from "@/components/(blog)/content/BlogPage/components/BlogCards";
 // import { FeaturedBlogs } from "@/components/(blog)/content/BlogPage/components/FeaturedBlogs";
+import { SchemaOrgScripts } from "@/common/utils/schema/SchemaOrgScripts";
 import FrontendPagination from "@/components/(_common)/pagination/FrontendPagination";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { SchemaOrgScripts } from "@/common/utils/schema/SchemaOrgScripts";
 
 // types
+import { COMPANY_NAME } from "@/common/constants/companyDetails";
 import { type BlogArticleDocument } from "@/common/types/documentation/blog/blogArticle";
 import { type BlogAuthorDocument } from "@/common/types/documentation/blog/blogAuthor";
 import { type ImageDocument } from "@/common/types/documentation/media/image";
 import { type SchemaDataType } from "@/common/types/seoTypes";
-import { COMPANY_NAME } from "@/common/constants/companyDetails";
 
 export default async function BlogPage({
   count,
@@ -55,9 +55,9 @@ export default async function BlogPage({
         url: `${DOMAIN}/blog/page/${page}`,
         posts: blogs.map((blog) => ({
           url: `${DOMAIN}${blog.slug.startsWith("/") ? blog.slug : "/" + blog.slug}`,
-          authorName: (blog.author as BlogAuthorDocument).name,
-          description: blog.meta.description || "",
-          headline: blog.heading,
+          authorName: (blog.author as BlogAuthorDocument)?.name || "Anonymous",
+          description: blog.meta?.description || "",
+          headline: blog.heading || "",
           publishedOn: moment(blog.createdAt).format("DD MM YYYY")
         }))
       }

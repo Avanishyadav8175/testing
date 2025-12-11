@@ -8,6 +8,7 @@ const getDocumentsFromFormFieldsGenerator = () => (elements: FormFields) => ({
   name: elements.name.value,
   title: elements.title.value,
   icon: elements.icon.value,
+  isActive: true,
   createdBy: "",
   updatedBy: ""
 });

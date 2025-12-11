@@ -1,5 +1,5 @@
 const API_KEY = "1tNMPQvO5jA8EgR2sJLI2MGoPKYqgo";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000";
 
 async function makeRequest(endpoint, method = "GET", body = null) {
     try {
@@ -30,8 +30,8 @@ async function setupAdminAndProducts() {
     // Step 1: Create Admin User
     console.log("👤 Creating Admin User...");
     const adminData = {
-        email: "admin@decorwish.com",
-        password: "admin123",
+        email: "admin@floriwish76decorwish.com",
+        password: "Decorwish@2025#Salman",
         name: "Decorwish Admin"
     };
 

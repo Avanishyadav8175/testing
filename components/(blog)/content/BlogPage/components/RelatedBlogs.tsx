@@ -38,7 +38,7 @@ export function RelatedBlogs({
     title: heading,
     path: `/blog/${slug}`,
     image: extractBlogCoverImage(layouts),
-    authorName: (author as BlogAuthorDocument).name
+    authorName: (author as BlogAuthorDocument)?.name || "Anonymous"
   }));
 
   return (

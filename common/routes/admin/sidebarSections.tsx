@@ -1,84 +1,78 @@
-import { AlignVerticalJustifyEnd, BookOpenText, Box, Cog, Combine, Cuboid, DatabaseZap, Gem, Grip, Images, IndianRupee, LayoutList, Package, Proportions, Settings, Settings2, Shapes, Shield, ShoppingBasket, Store, Type, Users } from "lucide-react";
-import { ADMIN_ROOT_ROUTE } from "@/common/utils/admin/sidebar";
-import { getSection } from "@/common/utils/admin/sidebar";
-import { AdminPanelHeading } from "@/components/(admin)/_ui/AdminTypography";
-import AddonTable from "@/components/(admin)/routes/content/addon/AddonTable";
-import AddonCategoryTable from "@/components/(admin)/routes/category/addon/AddonCategoryTable";
-import AdminRoleTable from "@/components/(admin)/routes/admin/adminRole/AdminRoleTable";
+import { ADMIN_ROOT_ROUTE, getSection } from "@/common/utils/admin/sidebar";
 import AdminTable from "@/components/(admin)/routes/admin/admin/AdminTable";
-import AdvancePaymentTable from "@/components/(admin)/routes/preset/advancePayment/AdvancePaymentTable";
-import AITagCategoryTable from "@/components/(admin)/routes/category/aiTag/AITagCategoryTable";
-import AITagTable from "@/components/(admin)/routes/preset/aiTag/AITagTable";
-import AuthSetting from "@/components/(admin)/routes/setting/auth/AuthSetting";
-import BalloonColorGroupTable from "@/components/(admin)/routes/preset/balloonColor/BalloonColorGroupTable";
 import BlogArticleTable from "@/components/(admin)/routes/blog/article/BlogArticleTable";
 import BlogAuthorTable from "@/components/(admin)/routes/blog/author/BlogAuthorTable";
 import BlogCategoryTable from "@/components/(admin)/routes/blog/category/BlogCategoryTable";
 import BlogTagTable from "@/components/(admin)/routes/blog/tag/BlogTagTable";
-import BrandTable from "@/components/(admin)/routes/preset/brand/BrandTable";
-import CancellationPolicyTable from "@/components/(admin)/routes/preset/cancellationPolicy/CancellationPolicyTable";
-import CancelledOrderTable from "@/components/(admin)/routes/order/orderCancelled/CancelledOrderTable";
-import CareInfoTable from "@/components/(admin)/routes/preset/careInfo/CareInfoTable";
-import CatalogueTable from "@/components/(admin)/routes/preset/catalogue/CatalogueTable";
+import ResetCache from "@/components/(admin)/routes/cache/reset/ResetCache";
+import RevalidateCache from "@/components/(admin)/routes/cache/revalidate/ReValidateCache";
+import AddonCategoryTable from "@/components/(admin)/routes/category/addon/AddonCategoryTable";
 import CatalogueCategoryTable from "@/components/(admin)/routes/category/catalogue/CatalogueCategoryTable";
-import ColorTable from "@/components/(admin)/routes/preset/color/ColorTable";
-import CityTable from "@/components/(admin)/routes/preset/city/CityTable";
-import CommissionTable from "@/components/(admin)/routes/preset/commission/CommissionTable";
 import ContentCategoryTable from "@/components/(admin)/routes/category/content/ContentCategoryTable";
-import ContentImageManagement from "@/components/(admin)/routes/media/image/ContentImageManagement";
-import CountryCodeTable from "@/components/(admin)/routes/preset/countryCode/CountryCodeTable";
+import AddonTable from "@/components/(admin)/routes/content/addon/AddonTable";
 import CouponTable from "@/components/(admin)/routes/content/coupon/CouponTable";
+import ProductTable from "@/components/(admin)/routes/content/product/ProductTable";
 import CustomerTable from "@/components/(admin)/routes/customer/customer/CustomerTable";
 import CustomizationImageManagement from "@/components/(admin)/routes/media/customizationImage/CustomizationImageManagement";
-import LabelTable from "@/components/(admin)/routes/preset/label/LabelTable";
+import IdentificationImageManagement from "@/components/(admin)/routes/media/identificationImage/IdentificationImageManagement";
+import ContentImageManagement from "@/components/(admin)/routes/media/image/ContentImageManagement";
+import IssueImageManagement from "@/components/(admin)/routes/media/issueImage/IssueImageManagement";
+import ReviewImageManagement from "@/components/(admin)/routes/media/reviewImage/ReviewImageManagement";
+import CancelledOrderTable from "@/components/(admin)/routes/order/orderCancelled/CancelledOrderTable";
 import DeliveredOrderTable from "@/components/(admin)/routes/order/orderDelivered/DeliveredOrderTable";
-import DeliveryDetailTable from "@/components/(admin)/routes/preset/deliveryDetail/DeliveryDetailTable";
-import DeliveryTypeTable from "@/components/(admin)/routes/preset/deliveryType/DeliveryTypeTable";
-import DynamicPageTable from "@/components/(admin)/routes/page/dynamic-page/DynamicPageTable";
-import EnhancementTable from "@/components/(admin)/routes/preset/enhancement/EnhancementTable";
 import FailedOrderTable from "@/components/(admin)/routes/order/orderFailed/FailedOrderTable";
-import FAQGroupTable from "@/components/(admin)/routes/preset/faqGroup/FAQGroupTable";
-import FlavourTable from "@/components/(admin)/routes/preset/flavour/FlavourTable";
+import OrderInProgressTable from "@/components/(admin)/routes/order/orderInProgress/OrderInProgressTable";
+import NewOrderTable from "@/components/(admin)/routes/order/orderNew/NewOrderTable";
+import DynamicPageTable from "@/components/(admin)/routes/page/dynamic-page/DynamicPageTable";
 import FooterSectionTable from "@/components/(admin)/routes/page/footerSection/FooterSectionTable";
-import FoundUsSourceTable from "@/components/(admin)/routes/preset/foundUsSource/FoundUsSourceTable";
-import GSTTable from "@/components/(admin)/routes/preset/gst/GSTTable";
 import HeaderNavLinkTable from "@/components/(admin)/routes/page/headerNavLink/HeaderNavLinkTable";
 import HomepageManagement from "@/components/(admin)/routes/page/homepage/HomepageManagement";
-import IdentificationImageManagement from "@/components/(admin)/routes/media/identificationImage/IdentificationImageManagement";
-import IssueImageManagement from "@/components/(admin)/routes/media/issueImage/IssueImageManagement";
-import NewOrderTable from "@/components/(admin)/routes/order/orderNew/NewOrderTable";
+import SubTopicTable from "@/components/(admin)/routes/page/subTopic/SubTopicTable";
+import TopicTable from "@/components/(admin)/routes/page/topic/TopicTable";
+import AdvancePaymentTable from "@/components/(admin)/routes/preset/advancePayment/AdvancePaymentTable";
+import BalloonColorGroupTable from "@/components/(admin)/routes/preset/balloonColor/BalloonColorGroupTable";
+import BrandTable from "@/components/(admin)/routes/preset/brand/BrandTable";
+import CancellationPolicyTable from "@/components/(admin)/routes/preset/cancellationPolicy/CancellationPolicyTable";
+import CareInfoTable from "@/components/(admin)/routes/preset/careInfo/CareInfoTable";
+import CatalogueTable from "@/components/(admin)/routes/preset/catalogue/CatalogueTable";
+import CityTable from "@/components/(admin)/routes/preset/city/CityTable";
+import ColorTable from "@/components/(admin)/routes/preset/color/ColorTable";
+import CommissionTable from "@/components/(admin)/routes/preset/commission/CommissionTable";
+import CountryCodeTable from "@/components/(admin)/routes/preset/countryCode/CountryCodeTable";
+import DeliveryDetailTable from "@/components/(admin)/routes/preset/deliveryDetail/DeliveryDetailTable";
+import DeliveryTypeTable from "@/components/(admin)/routes/preset/deliveryType/DeliveryTypeTable";
+import EnhancementTable from "@/components/(admin)/routes/preset/enhancement/EnhancementTable";
+import FAQGroupTable from "@/components/(admin)/routes/preset/faqGroup/FAQGroupTable";
+import FlavourTable from "@/components/(admin)/routes/preset/flavour/FlavourTable";
+import FoundUsSourceTable from "@/components/(admin)/routes/preset/foundUsSource/FoundUsSourceTable";
+import GSTTable from "@/components/(admin)/routes/preset/gst/GSTTable";
+import LabelTable from "@/components/(admin)/routes/preset/label/LabelTable";
 import NoteGroupTable from "@/components/(admin)/routes/preset/noteGroup/NoteGroupTable";
 import OccasionTable from "@/components/(admin)/routes/preset/occasion/OccasionTable";
-import OrderInProgressTable from "@/components/(admin)/routes/order/orderInProgress/OrderInProgressTable";
 import PaymentCycleTable from "@/components/(admin)/routes/preset/paymentCycle/PaymentCycleTable";
-import PaymentSetting from "@/components/(admin)/routes/setting/payment/PaymentSetting";
 import ProcessingTimeTable from "@/components/(admin)/routes/preset/processingTime/ProcessingTimeTable";
-import ProductTable from "@/components/(admin)/routes/content/product/ProductTable";
 import PromotionTagTable from "@/components/(admin)/routes/preset/promotionTag/PromotionTagTable";
 import QuickLinkTable from "@/components/(admin)/routes/preset/quickLink/QuickLinkTable";
 import RelationTable from "@/components/(admin)/routes/preset/relation/RelationTable";
-import ResetCache from "@/components/(admin)/routes/cache/reset/ResetCache";
-import RevalidateCache from "@/components/(admin)/routes/cache/revalidate/ReValidateCache";
 import ReviewGroupTable from "@/components/(admin)/routes/preset/reviewGroup/ReviewGroupTable";
-import ReviewImageManagement from "@/components/(admin)/routes/media/reviewImage/ReviewImageManagement";
 import SearchTagTable from "@/components/(admin)/routes/preset/searchTag/SearchTagTable";
 import SecurityQuestionTable from "@/components/(admin)/routes/preset/securityQuestion/SecurityQuestionTable";
-import ServiceImageSetting from "@/components/(admin)/routes/setting/serviceImage/ServiceImageSetting";
-import ServiceTable from "@/components/(admin)/routes/content/service/ServiceTable";
 import StateTable from "@/components/(admin)/routes/preset/state/StateTable";
-import SubTopicTable from "@/components/(admin)/routes/page/subTopic/SubTopicTable";
-import TopicTable from "@/components/(admin)/routes/page/topic/TopicTable";
 import TrendingSearchKeywordTable from "@/components/(admin)/routes/preset/trendingSearchKeyword/TrendingSearchKeywordTable";
 import UnitTable from "@/components/(admin)/routes/preset/unit/UnitTable";
 import UpgradeTable from "@/components/(admin)/routes/preset/upgrade/UpgradeTable";
 import VendorOfferCategoryTable from "@/components/(admin)/routes/preset/vendorOfferCategory/VendorOfferCategoryTable";
+import VenueTable from "@/components/(admin)/routes/preset/venue/VenueTable";
+import AuthSetting from "@/components/(admin)/routes/setting/auth/AuthSetting";
+import PaymentSetting from "@/components/(admin)/routes/setting/payment/PaymentSetting";
+import ServiceImageSetting from "@/components/(admin)/routes/setting/serviceImage/ServiceImageSetting";
 import VendorTable from "@/components/(admin)/routes/vendor/vendor/VendorTable";
 import VendorRequestTable from "@/components/(admin)/routes/vendor/vendorRequest/VendorRequestTable";
-import VenueTable from "@/components/(admin)/routes/preset/venue/VenueTable";
+import { AlignVerticalJustifyEnd, Box, Cog, Combine, Grip, Images, IndianRupee, Proportions, Settings, Settings2, Shapes, ShoppingBasket, Type } from "lucide-react";
 
 // labels
-import CancelledOrderLabel from "@/components/(admin)/sidebar/order/CancelledOrderLabel";
 import CustomerLabel from "@/components/(admin)/sidebar/customer/CustomerLabel";
+import CancelledOrderLabel from "@/components/(admin)/sidebar/order/CancelledOrderLabel";
 import DeliveredOrderLabel from "@/components/(admin)/sidebar/order/DeliveredOrderLabel";
 import FailedOrderLabel from "@/components/(admin)/sidebar/order/FailedOrderLabel";
 import InProgressOrderLabel from "@/components/(admin)/sidebar/order/InProgressOrderLabel";
@@ -88,11 +82,11 @@ import VendorRequestLabel from "@/components/(admin)/sidebar/vendor/VendorReques
 
 // types
 import { type AdminPanelSection } from "@/common/types/layouts/admin/adminPanelLayout";
-import SubSubTopicTable from "@/components/(admin)/routes/page/subSubTopic/SubSubTopicTable";
-import SubSubSubTopicTable from "@/components/(admin)/routes/page/subSubSubTopic/SubSubSubTopicTable";
-import GMC from "@/components/(admin)/routes/gmc/GMC";
-import SystemHealth from "@/components/(admin)/routes/system/SystemHealth";
 import AdminDashboard from "@/components/(admin)/dashboard/AdminDashboard";
+import GMC from "@/components/(admin)/routes/gmc/GMC";
+import SubSubSubTopicTable from "@/components/(admin)/routes/page/subSubSubTopic/SubSubSubTopicTable";
+import SubSubTopicTable from "@/components/(admin)/routes/page/subSubTopic/SubSubTopicTable";
+import SystemHealth from "@/components/(admin)/routes/system/SystemHealth";
 
 export const SIDEBAR_SECTIONS: AdminPanelSection[] = [
   // Dashboard ---------------------------
@@ -712,26 +706,25 @@ export const SIDEBAR_SECTIONS: AdminPanelSection[] = [
   }),
 
 
-  // // Mobile Categories --------------------------
-  // getSection({
-  //   sectionName: "mobileCatgories",
-  //   sectionLabel: "Mobile Categories",
-  //   icon: (
-  //     <Shapes
-  //       strokeWidth={1.5}
-  //       width={20}
-  //     />
-  //   ),
-  //   subSections: [
-
-  //     {
-  //       sectionName: "cataCategory",
-  //       sectionLabel: "Mobile Category",
-  //       icon: <></>,
-  //       component: <CatalogueCategoryTable />
-  //     },
-  //   ]
-  // }),
+  // Mobile Categories --------------------------
+  getSection({
+    sectionName: "mobileCatgories",
+    sectionLabel: "Mobile Categories",
+    icon: (
+      <Shapes
+        strokeWidth={1.5}
+        width={20}
+      />
+    ),
+    subSections: [
+      {
+        sectionName: "cataCategory",
+        sectionLabel: "Mobile Category Groups",
+        icon: <></>,
+        component: <CatalogueCategoryTable />
+      },
+    ]
+  }),
 
   // Settings --------------------------
   getSection({

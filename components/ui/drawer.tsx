@@ -39,22 +39,42 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <DrawerPortal>
-    <DrawerOverlay />
-    <DrawerPrimitive.Content
-      ref={ref}
-      className={cn(
-        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </DrawerPrimitive.Content>
-  </DrawerPortal>
-));
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & {
+    hideDefaultTitle?: boolean;
+    hideDefaultDescription?: boolean;
+  }
+>(({ className, children, hideDefaultTitle, hideDefaultDescription, ...props }, ref) => {
+  // Check if children already contain DrawerTitle or DrawerDescription
+  const childrenArray = React.Children.toArray(children);
+  const hasTitle = childrenArray.some(
+    (child) => React.isValidElement(child) && child.type === DrawerTitle
+  );
+  const hasDescription = childrenArray.some(
+    (child) => React.isValidElement(child) && child.type === DrawerDescription
+  );
+
+  return (
+    <DrawerPortal>
+      <DrawerOverlay />
+      <DrawerPrimitive.Content
+        ref={ref}
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
+          className
+        )}
+        {...props}
+      >
+        {!hasTitle && !hideDefaultTitle && (
+          <DrawerPrimitive.Title className="sr-only">Drawer</DrawerPrimitive.Title>
+        )}
+        {!hasDescription && !hideDefaultDescription && (
+          <DrawerPrimitive.Description className="sr-only" />
+        )}
+        {children}
+      </DrawerPrimitive.Content>
+    </DrawerPortal>
+  );
+});
 DrawerContent.displayName = "DrawerContent";
 
 const DrawerHeader = ({
@@ -107,14 +127,7 @@ const DrawerDescription = React.forwardRef<
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
 
 export {
-  Drawer,
-  DrawerPortal,
-  DrawerOverlay,
-  DrawerTrigger,
-  DrawerClose,
-  DrawerContent,
-  DrawerHeader,
-  DrawerFooter,
-  DrawerTitle,
-  DrawerDescription
+  Drawer, DrawerClose,
+  DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerPortal, DrawerTitle, DrawerTrigger
 };
+

@@ -53,7 +53,7 @@ async function Footer() {
         { label: "Terms & Conditions", path: FRONTEND_LINKS.DYNAMIC_PAGE + "/term-condition" },
       ] as FooterSectionLinkDocument[]
     },
-    /* {
+     {
       heading: "Top Categories",
       order: 1,
       links: [
@@ -63,7 +63,7 @@ async function Footer() {
         { label: "Balloons", path: "" },
         { label: "Gifts", path: "" },
       ] as FooterSectionLinkDocument[]
-    }, */
+    }, 
   ] as FooterSectionDocument[];
 
   return <FooterClient footerSections={footerSections} />;

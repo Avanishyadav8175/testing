@@ -19,7 +19,7 @@ export default async function Sitemap(): Promise<Sitemap> {
         response && response?.data ? (response.data as SitemapData[]) : [];
 
       const sitemap: Sitemap = sitemapBlogs.map(({ slug, updatedAt }) => ({
-        url: `${DOMAIN}/${slug}`,
+        url: `${DOMAIN}/blog/${slug}`,   // ✅ FIXED
         changeFrequency: "monthly",
         lastModified: updatedAt,
         priority: 0.5
@@ -27,8 +27,10 @@ export default async function Sitemap(): Promise<Sitemap> {
 
       return sitemap;
     } catch (error) {
-      // Return empty array during build time when API is not available
-      console.warn('Sitemap generation failed during build, returning empty sitemap:', error);
+      console.warn(
+        "Sitemap generation failed, returning empty sitemap:",
+        error
+      );
       return [];
     }
   }

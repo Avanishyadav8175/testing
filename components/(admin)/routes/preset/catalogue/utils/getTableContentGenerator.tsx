@@ -2,18 +2,17 @@
 import { OPTIMIZE_IMAGE } from "@/config/image";
 
 // libraries
-import moment from "moment";
 
 // components
-import Image from "next/image";
 import TupleActions from "@/components/(_common)/TableLayout/TupleActions";
+import Image from "next/image";
 
 // types
-import { type AdminTableData } from "@/common/types/layouts/admin/adminTableLayout";
-import { type CatalogueDocument } from "@/common/types/documentation/presets/catalogue";
 import { type CatalogueCategoryDocument } from "@/common/types/documentation/categories/catalogueCategory";
 import { type ImageDocument } from "@/common/types/documentation/media/image";
 import { type PermissionDocument } from "@/common/types/documentation/nestedDocuments/permission";
+import { type CatalogueDocument } from "@/common/types/documentation/presets/catalogue";
+import { type AdminTableData } from "@/common/types/layouts/admin/adminTableLayout";
 import { type TableContent } from "@/components/(_common)/TableLayout/TableContent";
 
 const getTableContentGenerator =
@@ -65,12 +64,12 @@ const getTableContentGenerator =
           align: "left",
           sortable: false
         },
-        /* {
-          label: "category",
-          span: 3,
+        {
+          label: "Category",
+          span: 2,
           align: "left",
           sortable: false
-        }, */
+        },
         {
           label: "Actions",
           span: 1,
@@ -132,7 +131,7 @@ const getTableContentGenerator =
                 },
                 action: { action: () => { }, type: "none" }
               },
-              /* {
+              {
                 value: {
                   label:
                     catalogueCategories.find(({ _id }) => _id === category)
@@ -141,7 +140,7 @@ const getTableContentGenerator =
                   align: "left"
                 },
                 action: { action: () => { }, type: "none" }
-              }, */
+              },
               {
                 value: {
                   label: (
