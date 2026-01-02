@@ -1,50 +1,49 @@
 // constants
 import { DOMAIN } from "@/common/constants/domain";
+import { INRSymbol } from "@/common/constants/symbols";
 import { FRONTEND_LINKS } from "@/common/routes/frontend/staticLinks";
 import { INITIAL_CUSTOMIZATION } from "../constants/initialCustomization";
 import { INITIAL_DELIVERY } from "../constants/initialDelivery";
-import { INRSymbol } from "@/common/constants/symbols";
 
 // utils
-import { lazy, memo } from "react";
-import { getCartItem } from "./utils/getCartItem";
-import { getContentPrice } from "../utils/getContentPrice";
 import { setLocalStorage } from "@/common/utils/storage/local";
+import { lazy, memo } from "react";
+import { getContentPrice } from "../utils/getContentPrice";
+import { getCartItem } from "./utils/getCartItem";
 
 // hooks
-import { useCallback, useEffect, useId, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { useAppStates } from "@/hooks/useAppState/useAppState";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useId, useMemo, useState } from "react";
 
 // components
+import { Suspense } from "react";
 import ContentDetailAssurance from "./components/ContentDetailAssurance";
 import ContentDetailBookNowButton from "./components/ContentDetailBookNowButton";
-import ContentDetailCouponSection from "./components/ContentDetailCouponSection";
 import ContentDetailCustomizeButton from "./components/ContentDetailCustomizeButton";
 import ContentDetailDelivery from "./components/ContentDetailDelivery";
 import ContentDetailInfo from "./components/ContentDetailInfo";
 import ContentDetailPrice from "./components/ContentDetailPrice";
 import ContentDetailRating from "./components/ContentDetailRating";
+import ContentDetailTitleSection from "./components/ContentDetailTitleSection";
+import ContentDetailVariantSections from "./components/ContentDetailVariantSection";
 const LazyContentAddonDialog = lazy(
   () => import("../addon/ContentAddonDialog")
 );
 const LazyContentCustomize = lazy(
   () => import("../customize/ContentCustomizeDialog")
 );
-import ContentDetailTitleSection from "./components/ContentDetailTitleSection";
-import ContentDetailVariantSections from "./components/ContentDetailVariantSection";
-import { Suspense } from "react";
 
 // types
+import { type ContentDocument } from "@/common/types/documentation/contents/content";
+import { type CouponDocument } from "@/common/types/documentation/contents/coupon";
+import { type ImageDocument } from "@/common/types/documentation/media/image";
 import { type CartItemAddonDocument } from "@/common/types/documentation/nestedDocuments/cartItemAddon";
 import { type CartItemCustomizationDocument } from "@/common/types/documentation/nestedDocuments/cartItemCustomization";
 import { type CartItemDeliveryDocument } from "@/common/types/documentation/nestedDocuments/cartItemDelivery";
-import { type ContentDocument } from "@/common/types/documentation/contents/content";
 import { type ContentCustomVariantDocument } from "@/common/types/documentation/nestedDocuments/contentCustomVariant";
 import { type ContentCustomVariantCategoryDocument } from "@/common/types/documentation/nestedDocuments/contentCustomVariantCategory";
-import { type CouponDocument } from "@/common/types/documentation/contents/coupon";
-import { type ImageDocument } from "@/common/types/documentation/media/image";
 import { type UnitDocument } from "@/common/types/documentation/presets/unit";
 import ContentDetailWhatsappButton from "./components/ContentDetailWhatsappButton";
 
@@ -307,7 +306,7 @@ function ContentDetail({
 
   const handleShowCustomizations = useCallback(() => {
     setShowCustomization(true);
-  }, [delivery, isAvailable, selectedCity]);
+  }, []);
 
   // const handleShowCustomizations = useCallback(() => {
   //   if (

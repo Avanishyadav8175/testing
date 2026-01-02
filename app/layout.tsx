@@ -1,8 +1,7 @@
-import { Golos_Text } from "next/font/google";
+import "@/app/globals.css";
 import { type Children } from "@/common/types/reactTypes";
 import { type Metadata } from "next";
-import { WEBSITE_NAME } from "@/common/constants/environmentVariables";
-import "@/app/globals.css";
+import { Golos_Text } from "next/font/google";
 
 const roboto = Golos_Text({
   subsets: ["latin"],
@@ -12,6 +11,9 @@ const roboto = Golos_Text({
 export const metadata: Metadata = {
   title: "Floriwish - Send Gifts, Flowers, Cakes & Balloon Decoration",
   description: "Your One-Stop Shop for All Your Gifting & Celebration Needs",
+  icons: {
+    icon: "/favicon.ico"
+  },
   openGraph: {
     title: "Floriwish - Send Gifts, Flowers, Cakes & Balloon Decoration",
     description: "Your One-Stop Shop for All Your Gifting & Celebration Needs",
@@ -46,3 +48,4 @@ export default function RootLayout({ children }: { children: Children }) {
     </html>
   );
 }
+

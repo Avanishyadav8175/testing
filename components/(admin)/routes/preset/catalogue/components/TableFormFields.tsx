@@ -45,6 +45,7 @@ export default function TableFormFields({
     if (initialCategoryValue && initialCategoryValue !== catalogueCategory) {
       setCatalogueCategory(initialCategoryValue);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialCategoryValue]);
 
   return (

@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Loader2, Database, Server, Cloud, Package } from "lucide-react";
+import { Cloud, Database, Loader2, Package, Server } from "lucide-react";
+import { useState } from "react";
 
 interface HealthStatus {
   status: string;
@@ -188,7 +188,7 @@ export default function SystemHealth() {
         <Card>
           <CardContent className="pt-6">
             <div className="text-center text-muted-foreground">
-              Click "Check System Health" to test your database connections and system status.
+              Click &quot;Check System Health&quot; to test your database connections and system status.
             </div>
           </CardContent>
         </Card>

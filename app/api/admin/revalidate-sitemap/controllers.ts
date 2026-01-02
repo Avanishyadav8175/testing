@@ -13,17 +13,19 @@ export const clearCache = async ({
   cloudfrontPath: string;
 }): Promise<RevalidateImageCache> => {
   try {
+    // ✅ Redis clear
     const isRedisCleared = await clearRedis({ keys: redisKeys });
 
-    const isCloudfrontCleared = await cloudfront.cache.clear({
-      path: cloudfrontPath
-    });
+    // ✅ CloudFront clear (NEW SIGNATURE)
+    await cloudfront.cache.clear([cloudfrontPath]);
 
     return {
       redis: isRedisCleared,
-      cloudfront: isCloudfrontCleared
+      cloudfront: true
     };
-  } catch {
+  } catch (error) {
+    console.error("Clear cache failed:", error);
+
     return {
       redis: false,
       cloudfront: false

@@ -1,72 +1,69 @@
-// config
-import { RENDERING_STRATEGY } from "@/config/renderingStrategy";
+// app/page.tsx
 
-// vercel
-export const dynamic =
-  RENDERING_STRATEGY === "SSR" ? "force-dynamic" : undefined;
+// ✅ STATIC + ISR (fastest)
+export const dynamic = "force-static";
+export const revalidate = 300; // 5 min cache
 
 // requests
 import { fetchHomepage } from "@/request/page/homepage";
 
 // constants
 import { CANONICAL_LINK } from "@/common/constants/meta";
+import {
+  COMPANY_META_DESCRIPTION,
+  COMPANY_NAME,
+  COMPANY_PRIMARY_BANNER,
+  COMPANY_URL
+} from "@/common/constants/companyDetails";
 
 // components
-import HomepageClient from "@/components/pages/(frontend)/Home/HomepageClient";
+import dynamicImport from "next/dynamic";
+import { Suspense } from "react";
 
 // types
-import { type HomepageLayoutDocument } from "@/common/types/documentation/pages/homepageLayout";
-import { COMPANY_LOGO_URL, COMPANY_META_DESCRIPTION, COMPANY_NAME, COMPANY_PRIMARY_BANNER, COMPANY_URL } from "@/common/constants/companyDetails";
+import { HomepageLayoutDocument } from "@/common/types/documentation/pages/homepageLayout";
 
+/* ---------------- META ---------------- */
 export const metadata = {
   title: COMPANY_NAME,
   description: COMPANY_META_DESCRIPTION,
+  alternates: { canonical: CANONICAL_LINK },
   openGraph: {
     title: COMPANY_NAME,
     description: COMPANY_META_DESCRIPTION,
     url: COMPANY_URL,
-    siteName: COMPANY_NAME,
-    images: [COMPANY_PRIMARY_BANNER],
-    locale: "en_IN",
-    type: "website"
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: COMPANY_NAME,
-    description: COMPANY_META_DESCRIPTION,
     images: [COMPANY_PRIMARY_BANNER]
-  },
-  robots: {
-    index: true,
-    follow: true
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png"
-  },
-  keywords: [],
-  alternates: {
-    canonical: CANONICAL_LINK
   }
 };
 
-async function getHomepageLayouts() {
+/* ---------------- DATA ---------------- */
+async function getHomepageLayouts(): Promise<HomepageLayoutDocument[]> {
   try {
-    const response = await fetchHomepage(RENDERING_STRATEGY);
+    const response = await fetchHomepage("ISR");
 
-    if (response.data) {
-      return response.data as HomepageLayoutDocument[];
-    }
-  } catch (error) {
-    return [] as HomepageLayoutDocument[];
+    return (response?.data ?? []).filter(
+      (item): item is HomepageLayoutDocument => Boolean(item)
+    );
+  } catch {
+    return [];
   }
-
-  return [] as HomepageLayoutDocument[];
 }
 
-export default async function Home() {
-  const homepageLayouts = (await getHomepageLayouts()) || [];
 
-  return <HomepageClient homepageLayouts={homepageLayouts} />;
+/* ---------------- CLIENT ---------------- */
+// ❗ client JS defer
+const HomepageClient = dynamicImport(
+  () => import("@/components/pages/(frontend)/Home/HomepageClient"),
+  { ssr: false }
+);
+
+/* ---------------- PAGE ---------------- */
+export default async function Home() {
+  const homepageLayouts = await getHomepageLayouts();
+
+  return (
+    <Suspense fallback={null}>
+      <HomepageClient homepageLayouts={homepageLayouts} />
+    </Suspense>
+  );
 }

@@ -1,29 +1,29 @@
 // icons
-import { Calendar, Clock1, Clock4 } from "lucide-react";
+import { Clock4 } from "lucide-react";
 
 // utils
-import { formattedDate } from "../utils/date";
 import { lazy } from "react";
+import { formattedDate } from "../utils/date";
 
 // hooks
 import { useEffect, useMemo, useState } from "react";
 
 // components
+import { Suspense } from "react";
 import ContentDetailDeliverySelectDateStatus from "./ContentDetailDeliverySelectDateStatus";
 // import ContentDetailDeliverySelectDateTime from "./ContentDetailDeliverySelectDateTime";
 const LazyContentDetailDeliverySelectDateTime = lazy(
   () => import("./ContentDetailDeliverySelectDateTime")
 );
-import { Suspense } from "react";
 
 // types
 import { type CartItemDeliveryDocument } from "@/common/types/documentation/nestedDocuments/cartItemDelivery";
 import { type ContentDeliveryDocument } from "@/common/types/documentation/nestedDocuments/contentDelivery";
 // import { type ContentDeliverySlotDocument } from "@/common/types/documentation/nestedDocuments/contentDeliverySlot";
+import { type TimeSlotDocument } from "@/common/types/documentation/nestedDocuments/timeSlot";
 import { type DeliveryTypeDocument } from "@/common/types/documentation/presets/deliveryType";
 import { type ProcessingTimeDocument } from "@/common/types/documentation/presets/processingTime";
 import { type SelectDateStatus } from "../types/delivery";
-import { type TimeSlotDocument } from "@/common/types/documentation/nestedDocuments/timeSlot";
 
 export default function ContentDetailDeliveryDate({
   status,
@@ -43,27 +43,27 @@ export default function ContentDetailDeliveryDate({
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   // variables
-  const deliverySlots = contentDelivery?.slots || [];
-
   const orderProcessingTime = (
     contentDelivery?.processingTime as ProcessingTimeDocument
   )?.hours || 0;
 
   // memoized
   const deliveryType = useMemo(
-    () =>
-      deliverySlots.find(
+    () => {
+      const deliverySlots = contentDelivery?.slots || [];
+      return deliverySlots.find(
         ({ type }) =>
           (type as DeliveryTypeDocument)?._id ===
           (cartItemDelivery?.type as DeliveryTypeDocument)?._id
       )
         ? (deliverySlots.find(
-            ({ type }) =>
-              (type as DeliveryTypeDocument)?._id ===
-              (cartItemDelivery?.type as DeliveryTypeDocument)?._id
-          )?.type as DeliveryTypeDocument)
-        : null,
-    [deliverySlots, cartItemDelivery.type]
+          ({ type }) =>
+            (type as DeliveryTypeDocument)?._id ===
+            (cartItemDelivery?.type as DeliveryTypeDocument)?._id
+        )?.type as DeliveryTypeDocument)
+        : null;
+    },
+    [contentDelivery?.slots, cartItemDelivery.type]
   );
 
   const deliveryTimeSlot = useMemo(

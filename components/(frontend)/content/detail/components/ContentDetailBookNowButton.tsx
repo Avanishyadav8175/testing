@@ -12,9 +12,19 @@ function ContentDetailBookNowButton({
 }) {
   return (
     <div
-      className={`cursor-pointer flex items-center justify-center gap-2.5 brightness-100 opacity-100 relative group overflow-hidden bg-moss text-ivory-1 px-3 py-3 sm:py-3.5 rounded-lg sm:rounded-xl text-lg text-center ${fullWidth ? "col-span-2" : ""}  whitespace-nowrap transition-all duration-300`}
-      onClick={onClick}
-    >
+    onClick={onClick}
+    className={`cursor-pointer relative group overflow-hidden
+    flex items-center justify-center gap-2
+    bg-moss text-ivory-1
+    px-3 py-2.5 sm:py-3
+    rounded-lg sm:rounded-xl
+    text-base sm:text-lg
+    leading-none
+    min-h-[48px]
+    transition-all duration-300
+    ${fullWidth ? "col-span-2" : ""}`}
+  >
+{/* update add to cart button by  keshav  */}
       <ShoppingCart
         width={16}
         height={16}

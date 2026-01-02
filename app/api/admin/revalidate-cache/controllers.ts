@@ -34,13 +34,16 @@ export const clearCache = async ({
       revalidateTag(tag);
     });
 
-    let isCloudfrontCleared = false;
+   let isCloudfrontCleared = false;
 
-    if (cloudfrontPath) {
-      isCloudfrontCleared = await cloudfront.cache.clear({
-        path: cloudfrontPath
-      });
-    }
+if (cloudfrontPath) {
+  try {
+    const response = await cloudfront.cache.clear([cloudfrontPath]);
+    isCloudfrontCleared = !!response; // 👈 boolean conversion
+  } catch (error) {
+    console.warn("CloudFront clear failed:", error);
+  }
+}
 
     return {
       redis: isRedisCleared,

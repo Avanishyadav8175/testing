@@ -1,11 +1,11 @@
 // hooks
-import { useEffect, useMemo, useState } from "react";
 import { useAppStates } from "@/hooks/useAppState/useAppState";
+import { useEffect, useMemo, useState } from "react";
 
 // components
+import ContentDetailDeliveryCity from "./ContentDetailDeliveryCity";
 import ContentDetailDeliveryDate from "./ContentDetailDeliveryDate";
 import ContentDetailDeliveryEarliest from "./ContentDetailDeliveryEarliest";
-import ContentDetailDeliveryCity from "./ContentDetailDeliveryCity";
 
 // types
 import { type CartItemDeliveryDocument } from "@/common/types/documentation/nestedDocuments/cartItemDelivery";
@@ -15,8 +15,8 @@ import { type ContentDeliverySlotDocument } from "@/common/types/documentation/n
 import { type DeliveryTypeDocument } from "@/common/types/documentation/presets/deliveryType";
 import { type ProcessingTimeDocument } from "@/common/types/documentation/presets/processingTime";
 import {
-  type SelectDateStatus,
-  type SelectCityStatus
+  type SelectCityStatus,
+  type SelectDateStatus
 } from "../types/delivery";
 
 export default function ContentDetailDelivery({
@@ -40,12 +40,7 @@ export default function ContentDetailDelivery({
   onChangeShowDeliveryStatus: (showDeliveryStatus: boolean) => void;
   onChangeCartItemDelivery: (delivery: CartItemDeliveryDocument) => void;
 }) {
-  // Early return if contentDelivery is not available
-  if (!contentDelivery) {
-    return null;
-  }
-
-  // hooks
+  // hooks - must be called before any conditional returns
   const {
     location: {
       data: { selectedCity }
@@ -95,15 +90,17 @@ export default function ContentDetailDelivery({
 
   // side effects
   useEffect(() => {
+    if (!contentDelivery) return;
     if (selectedCity) {
       setSelectCityStatus(isAvailable ? "available" : "not-available");
     } else if (showDeliveryStatus) {
       setSelectCityStatus("not-selected");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showDeliveryStatus, selectedCity, isAvailable]);
+  }, [showDeliveryStatus, selectedCity, isAvailable, contentDelivery]);
 
   useEffect(() => {
+    if (!contentDelivery) return;
     if (
       cartItemDelivery?.date &&
       cartItemDelivery?.type &&
@@ -117,15 +114,22 @@ export default function ContentDetailDelivery({
     showDeliveryStatus,
     cartItemDelivery?.date,
     cartItemDelivery?.type,
-    cartItemDelivery.slot
+    cartItemDelivery.slot,
+    contentDelivery
   ]);
 
   useEffect(() => {
+    if (!contentDelivery) return;
     if (selectCityStatus || selectDateStatus) {
       onChangeShowDeliveryStatus(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectCityStatus, selectDateStatus]);
+  }, [selectCityStatus, selectDateStatus, contentDelivery]);
+
+  // Early return if contentDelivery is not available
+  if (!contentDelivery) {
+    return null;
+  }
 
   if (contentAvailability.availableAt === "all-india") {
     return (

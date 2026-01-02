@@ -1,7 +1,12 @@
-import { clearCloudfrontCache } from "./cloudfront";
+import { invalidateCloudFrontCache } from "./cloudfront";
 import { addFileToS3, addDirectoryToS3, deleteFileFromS3, deleteFilesFromS3, deleteDirectoryFromS3 } from "./s3";
 
-export const cloudfront = { cache: { clear: clearCloudfrontCache } };
+export const cloudfront = {
+  cache: {
+    clear: invalidateCloudFrontCache
+  }
+};
+
 
 export const s3 = {
   file: {
