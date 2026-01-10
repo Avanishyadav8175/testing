@@ -44,6 +44,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: Children }) {
   return (
     <html lang="en">
+    
       <body className={`relative ${roboto.className}`}>{children}</body>
     </html>
   );
